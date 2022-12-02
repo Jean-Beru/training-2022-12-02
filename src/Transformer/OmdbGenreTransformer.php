@@ -13,7 +13,7 @@ class OmdbGenreTransformer implements DataTransformerInterface
             throw new \InvalidArgumentException();
         }
 
-        return (new Genre())->setName($value);
+        return (new Genre())->setName(strtolower($value));
     }
 
     public function reverseTransform(mixed $value): mixed

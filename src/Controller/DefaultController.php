@@ -15,7 +15,6 @@ class DefaultController extends AbstractController
     #[Route('', name: 'index')]
     public function index(MovieRepository $repository, string $sfVersion): Response
     {
-        dump($sfVersion);
         $movies = $repository->findBy([], ['id' => 'DESC'], 6);
 
         return $this->render('default/index.html.twig', [

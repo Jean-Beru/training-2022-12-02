@@ -24,11 +24,17 @@ class OmdbMovieTransformer implements DataTransformerInterface
         }
         foreach (self::KEYS as $key) {
             if (!array_key_exists($key, $value)) {
-                throw new \InvalidArgumentException();
+                throw new \InvalidArgumentException(sprintf('Field "%s" is missing.', $key));
             }
         }
 
-        $date = $value['Released'] === 'N/A' ? $value['Year'] : $value['Released'];
+//        $date = $value['Released'] === 'N/A' ? $value['Year'] : $value['Released'];
+        if ($value['Released'] === 'N/A') {
+            $date = $value['Year'];
+        } else {
+            $date = $value['Released'];
+        }
+
 
         return (new Movie())
             ->setTitle($value['Title'])
