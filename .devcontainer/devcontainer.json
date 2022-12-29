@@ -15,20 +15,37 @@
     "DATABASE_URL": "sqlite:///%kernel.project_dir%/var/dev.db"
   },
   "onCreateCommand": {
-    "yarn": ["yarn", "install", "&&", "yarn", "build"],
+    "yarn": ["yarn", "install"],
     "composer": ["composer", "install"]
   },
   "postCreateCommand": {
+    "assets": ["yarn", "build"],
     "database": ["init_database.sh"]
   },
   "postStartCommand": {
     "server": ["symfony", "server:start", "--daemon", "--no-tls", "--port", "8000"]
   },
+  "forwardPorts": [
+    8000
+  ],
   "portsAttributes": {
     "8000": {
       "label": "Application",
       "onAutoForward": "openBrowserOnce"
     }
   },
-  "forwardPorts": ["8000"]
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "TheNouillet.symfony-vscode",
+        "bmewburn.vscode-intelephense-client",
+        "phproberto.vscode-php-getters-setters",
+        "mikestead.dotenv",
+        "redhat.vscode-yaml"
+      ],
+      "settings": {
+        "symfony-vscode.phpExecutablePath": "/usr/local/bin/php"
+      }
+    }
+  }
 }
