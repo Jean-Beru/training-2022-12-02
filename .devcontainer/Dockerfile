@@ -12,3 +12,6 @@ RUN sudo blackfire php:install
 # Scripts
 COPY init_database.sh /usr/bin/init_database.sh
 RUN chmod +x /usr/bin/init_database.sh
+
+# PHP configuration
+RUN echo "xdebug.discover_client_host=yes" >> /usr/local/etc/php/conf.d/xdebug.ini
