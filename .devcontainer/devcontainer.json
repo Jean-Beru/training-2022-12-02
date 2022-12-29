@@ -1,14 +1,10 @@
 {
   "name": "[SensioTV] Dev",
-  "build": {
-    "dockerfile": "Dockerfile",
-    "args": {
-      "VARIANT": "8.1"
-    }
-  },
+  "image": "mcr.microsoft.com/devcontainers/php:0-8.1",
   "features": {
     "ghcr.io/devcontainers/features/node:1": {"version": "lts/*"},
-    "ghcr.io/devcontainers/features/sshd:1": {}
+    "ghcr.io/devcontainers/features/sshd:1": {},
+    "ghcr.io/shyim/devcontainers-features/symfony-cli:0": {}
   },
   "containerEnv": {
     "APP_ENV": "dev",
@@ -20,7 +16,7 @@
   },
   "postCreateCommand": {
     "assets": ["yarn", "build"],
-    "database": ["init_database.sh"]
+    "database": ["bash", ".devcontainer/init_database.sh"]
   },
   "postStartCommand": {
     "server": ["symfony", "server:start", "--daemon", "--no-tls", "--port", "8000"]
