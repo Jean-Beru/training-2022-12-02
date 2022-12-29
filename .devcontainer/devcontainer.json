@@ -40,11 +40,14 @@
         "TheNouillet.symfony-vscode",
         "bmewburn.vscode-intelephense-client",
         "phproberto.vscode-php-getters-setters",
+        "xdebug.php-debug",
         "whatwedo.twig",
         "mikestead.dotenv",
         "redhat.vscode-yaml"
       ],
       "settings": {
+        "php.debug.executablePath": "/usr/local/bin/php",
+        "php.validate.executablePath": "/usr/local/bin/php",
         "symfony-vscode.phpExecutablePath": "/usr/local/bin/php"
       }
     }
