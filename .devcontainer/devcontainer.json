@@ -1,0 +1,63 @@
+{
+  "name": "[SensioTV] Dev",
+  "image": "mcr.microsoft.com/devcontainers/php:0-8.1",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {"version": "lts/*"},
+    "ghcr.io/devcontainers/features/sshd:1": {},
+    "ghcr.io/shyim/devcontainers-features/symfony-cli:0": {}
+  },
+  "containerEnv": {
+    "APP_ENV": "dev",
+    "DATABASE_URL": "sqlite:///%kernel.project_dir%/var/dev.db"
+  },
+  "onCreateCommand": {
+    "yarn": ["yarn", "install"],
+    "composer": ["composer", "install"]
+  },
+  "postCreateCommand": {
+    "assets": ["yarn", "build"],
+    "database": ["bash", ".devcontainer/init_database.sh"]
+  },
+  "postStartCommand": {
+    "server": ["symfony", "server:start", "--daemon", "--no-tls", "--port", "8000"]
+  },
+  "forwardPorts": [
+    8000
+  ],
+  "portsAttributes": {
+    "8000": {
+      "label": "Application",
+      "onAutoForward": "openBrowserOnce"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "TheNouillet.symfony-vscode",
+        "bmewburn.vscode-intelephense-client",
+        "phproberto.vscode-php-getters-setters",
+        "xdebug.php-debug",
+        "whatwedo.twig",
+        "mikestead.dotenv",
+        "redhat.vscode-yaml"
+      ],
+      "settings": {
+        "php.debug.executablePath": "/usr/local/bin/php",
+        "php.validate.executablePath": "/usr/local/bin/php",
+        "symfony-vscode.phpExecutablePath": "/usr/local/bin/php",
+        "launch": {
+          "version": "0.2.0",
+          "configurations": [
+            {
+                "name": "Listen for Xdebug",
+                "type": "php",
+                "request": "launch",
+                "port": 9000
+            }
+          ],
+          "compounds": []
+        }
+      }
+    }
+  }
+}
